@@ -3,13 +3,14 @@ import uuid4 from "uuid4";
 import Lista from './Lista';
 
 const App = () => {
-   /*  datos para cargar como ejemplo */
+    /*  datos para cargar como ejemplo */
     const [peliculas, setPeliculas] = useState([
         { id: 1, titulo: "El aro", ano: 2002, genero: "Terror", puntuacion: 7 },
         { id: 2, titulo: "El origen", ano: 2010, genero: "Ciencia ficción", puntuacion: 8 },
         { id: 3, titulo: "Star wars: episodio III", ano: 2005, genero: "Ciencia ficción", puntuacion: 3 },
         { id: 4, titulo: "Crepúsculo", ano: 2008, genero: "Romance", puntuacion: 5 },
     ]);
+    const [editarPelicula, setEditarPelicula] = useState(null)
 
     const errorTituloRef = useRef()
     const tituloRef = useRef();
@@ -17,20 +18,23 @@ const App = () => {
     const generoRef = useRef()
     const puntuacionRef = useRef()
 
+
+    /* para agregar una pelicula */
+
     const agregarPelicula = () => {
         const titulo = tituloRef.current.value.trim();
         const ano = anoRef.current.value.trim()
         const genero = generoRef.current.value.trim()
         const puntuacion = puntuacionRef.current.value.trim()
 
-        if (titulo == '') 
+        if (titulo == '')
             return alert("titulo no puede estar vacio");
-        if (ano>2025 || ano == "" || isNaN(ano))
+        if (ano > 2025 || ano == "" || isNaN(ano))
             return alert("Ingresa un año valido")
         if (genero == 0)
             return alert("selecciona un genero")
-        if(puntuacion >10 || puntuacion <1)
-            return alert("la puntuacion debe ser entre 1 y 10")        
+        if (puntuacion > 10 || puntuacion < 1)
+            return alert("la puntuacion debe ser entre 1 y 10")
         setPeliculas((prevPeliculas) => {
             const nuevaPelicula = {
                 id: uuid4(),
@@ -45,6 +49,8 @@ const App = () => {
 
     }
 
+
+   /*  para limpiar los campos del input */
     const limpiarCampos = () => {
         tituloRef.current.value = null
         anoRef.current.value = null
@@ -52,17 +58,34 @@ const App = () => {
         puntuacionRef.current.value = null
     }
 
-    const eliminar = (id) =>{
+
+    /* para eliminar peliculas */
+    const eliminar = (id) => {
         console.log(id)
         const eliminado = window.confirm('Desea eliminar la pelicula?')
-        if (eliminado){
+        if (eliminado) {
             const nuevaPelicula = peliculas.filter(pelicula => pelicula.id !== id)
             setPeliculas(nuevaPelicula)
         }
     }
-    const editar = (id) =>{
-        return <h1>holaaaa</h1>
+
+
+/*   no supe como resolver el editar */
+    useEffect(() => {
+        
+        if (editarPelicula !== null) {
+            setEditarPelicula(editarPelicula)
+        } else {
+
+        }
+
+    }, [editarPelicula])
+
+    const editar = pelicula => {
+
     }
+
+
 
     const KEY = 'peliculas'
     useEffect(() => {
@@ -119,7 +142,7 @@ const App = () => {
                 </div>
                 <div className="me-1 mt-2">
                     <button className="btn btn-success ms-2" onClick={agregarPelicula}>
-                        Agregar
+                        Enviar
                     </button>
                     <button className="btn btn-secondary ms-2" onClick={limpiarCampos}>
                         Limpiar
@@ -130,10 +153,12 @@ const App = () => {
 
 
 
+
+
             {/*   //componente Lista */}
             <div className=" d-flex align-content-start flex-wrap mt-5 ">
                 {peliculas.map((pelicula) => (
-                    <Lista key={pelicula.id} pelicula={pelicula} eliminar={eliminar} editar={editar}/>
+                    <Lista key={pelicula.id} pelicula={pelicula} eliminar={eliminar} setEditarPelicula={setEditarPelicula} />
 
                 ))}
             </div>
