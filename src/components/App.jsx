@@ -52,7 +52,7 @@ const App = () => {
         puntuacionRef.current.value = null
     }
 
-    const eliminarPelicula = (id) => {
+   const eliminarPelicula = (id) => {
         console.log(id)
         const eliminado = window.confirm("Seguro que desea eliminar?")
 
@@ -101,6 +101,9 @@ const App = () => {
                         <option value="0">Genero</option>
                         <option value="Terror">Terror</option>
                         <option value="Acción">Acción</option>
+                        <option value="Ciencia ficcion">Ciencia ficcion</option>
+                        <option value="Fantasia">Fantasia</option>
+                        <option value="Romance">Romance</option>
 
                     </select>
                 </div>
