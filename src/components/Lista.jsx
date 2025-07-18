@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 
-const Lista = (props, eliminarPelicula) => {
+
+const Lista = (props) => {
 
  
     return (
@@ -8,11 +9,11 @@ const Lista = (props, eliminarPelicula) => {
             <div className="col-8 col-sm-6 col-md-4 col-xl-3 mx-auto mx-md-0 "  >
                 <div className="card m-2 shadow-lg border-0" style={{ height: 190 }}>
                     <div className="col-12 d-flex justify-content-end text-center align-items-center">
-                        <button className="btn  mt-2 btn-info text-center ms-2 " style={{ height: 28 }} onClick={null}>
-                           E
+                        <button className="btn  mt-2  text-center ms-2 " style={{ height: 28 }}  onClick={() => props.editar(props.pelicula.id)}>
+                           <i className="bi bi-pencil-square"></i>
                         </button>
-                        <button className="btn me-3 mt-2 btn-danger ms-2 text-center" style={{ height: 28 }} onClick={() => eliminarPelicula(props.pelicula.id)}>
-                            X
+                        <button className="btn me-1 mt-2 text-info   text-center" style={{ height: 28 }} onClick={() => props.eliminar(props.pelicula.id)}>
+                            <i className="bi text-danger  bi-trash"></i>
                         </button>
                     </div>
 

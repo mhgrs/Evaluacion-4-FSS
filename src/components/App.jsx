@@ -3,7 +3,7 @@ import uuid4 from "uuid4";
 import Lista from './Lista';
 
 const App = () => {
-
+   /*  datos para cargar como ejemplo */
     const [peliculas, setPeliculas] = useState([
         { id: 1, titulo: "El aro", ano: 2002, genero: "Terror", puntuacion: 7 },
         { id: 2, titulo: "El origen", ano: 2010, genero: "Ciencia ficción", puntuacion: 8 },
@@ -52,14 +52,16 @@ const App = () => {
         puntuacionRef.current.value = null
     }
 
-   const eliminarPelicula = (id) => {
+    const eliminar = (id) =>{
         console.log(id)
-        const eliminado = window.confirm("Seguro que desea eliminar?")
-
-        if (eliminado) {
-            peliculas.filter(pelicula => pelicula.id !== id)
+        const eliminado = window.confirm('Desea eliminar la pelicula?')
+        if (eliminado){
+            const nuevaPelicula = peliculas.filter(pelicula => pelicula.id !== id)
             setPeliculas(nuevaPelicula)
         }
+    }
+    const editar = (id) =>{
+        return <h1>holaaaa</h1>
     }
 
     const KEY = 'peliculas'
@@ -131,7 +133,7 @@ const App = () => {
             {/*   //componente Lista */}
             <div className=" d-flex align-content-start flex-wrap mt-5 ">
                 {peliculas.map((pelicula) => (
-                    <Lista key={pelicula.id} pelicula={pelicula} eliminarPelicula={eliminarPelicula} />
+                    <Lista key={pelicula.id} pelicula={pelicula} eliminar={eliminar} editar={editar}/>
 
                 ))}
             </div>
